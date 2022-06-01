@@ -265,7 +265,7 @@ def plot_frac(result):
     fitplot.tight_layout()
     
 #     return np.mean(ylist), np.amax(yerrlst)
-    return ylist, yerrlst
+    return ylist, yerrlst, fitplot
 # -----------------------------------------------------------------------------
 def non_plot_frac(result):
     '''using result of esti_array, plot n/totN vs totN for each temperature'''
@@ -373,7 +373,7 @@ def plot_superfrac(result):
 
     fitplot.tight_layout()
     
-    return alist, aerrlist
+    return alist, aerrlist, fitplot
 # -----------------------------------------------------------------------------
 def non_plot_superfrac(result):
     '''using result of esti_array, plot sf fraction vs 1/sqrt(totN) for each temperature'''
@@ -397,6 +397,78 @@ def non_plot_superfrac(result):
         aerrlist.append(a1_err)
     
     return alist, aerrlist
+# -----------------------------------------------------------------------------
+def plot_only(result):
+    '''using result of esti_array, plot n/totN vs totN for each temperature'''
+    '''also returns mean of it and maximum of error'''
+    _x = result['totN'][0]
+    _x1 = np.asarray([1/(item) for item in _x])
+    _x2 = np.asarray([1/np.sqrt(item) for item in _x])
+#     x = np.asarray([item for item in x])
+#     x = np.asarray([1/np.sqrt(item) for item in x])
+    alist = []
+    aerrlist = []
+    ylist = []
+    yerrlst = []
+    nfig = len(result['Tset'])
+    fitplot, axs = plt.subplots(nrows=nfig+1, ncols=1, 
+                                sharex=False, figsize = [5,2*nfig])
+    
+    # Defining custom 'xlim' and 'ylim' values.
+    custom_xlim1 = (0, max(_x1)*1.1)
+    custom_ylim1 = (0, np.amax(result['n']/result['totN'])*1.1)
+    
+        # Defining custom 'xlim' and 'ylim' values.
+    custom_xlim2 = (0, max(_x2)*1.1)
+    custom_ylim2 = (0, np.amax(result['yarray'])*1.1)
+
+    # Setting the values for all axes.
+#     plt.setp(axs, xlim=custom_xlim2, ylim=custom_ylim2)
+    
+    axs[0].set_xlabel('1/N', fontsize = 12)
+    axs[0].set_ylabel('filling fraction', fontsize = 12)
+    axs[0].set_xlim(custom_xlim1)
+    axs[0].set_ylim(custom_ylim1)
+
+    for i in range(len(result['Tset'])):
+        tag = str(result['Tset'][i])
+        x = result['totN'][i]
+        x1 = np.asarray([1/(item) for item in x])
+        x2 = np.asarray([1/np.sqrt(item) for item in x])
+        y1 = result['n'][i]/result['totN'][i]
+        y2 = result['yarray'][i]
+        σ1 = result['nerr'][i]
+        σ2 = result['yerrarray'][i]
+
+        # peform the fits
+        a1,a1_err = get_a(x1,y1,σ1)
+        a1s,a1s_err = get_a(x2,y2,σ2)
+
+        # plot the data
+        axs[0].errorbar(x1, y1, yerr = σ1, color=colors[1], fmt='.')
+
+        # plot the fit results
+        fx1 = np.linspace(0,max(x1)*1.1,20)
+        axs[0].plot(fx1,a1[0]+a1[1]*fx1, linewidth=1.5, zorder=0, label=f'T={tag} fit')
+
+        # plot the data
+        axs[i+1].errorbar(x2,y2,yerr = σ2,color=colors[0], fmt='.',label=f'T={tag}')
+
+        # plot the fit results
+        fx2 = np.linspace(0,max(x2)*1.1,20)
+
+        axs[i+1].plot(fx2,a1s[0]+a1s[1]*fx2, color=colors[0], linewidth=1.5, zorder=0, label=f'T={tag} fit')
+#             axs[i+1].set_title(f'T={tag}')
+        axs[i+1].set_xlabel('sqrt(1/N)', fontsize = 12)
+        axs[i+1].set_ylabel('SF fraction', fontsize = 12)
+        axs[i+1].set_xlim(custom_xlim2)
+        axs[i+1].set_ylim(custom_ylim2)
+        axs[i+1].legend()
+    
+    axs[0].legend()
+    fitplot.tight_layout()
+
+    return fitplot
 # -----------------------------------------------------------------------------
 def plot_superdens(result):
     '''using result of esti_array, plot sf density vs 1/sqrt(totN) for each temperature'''
