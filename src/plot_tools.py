@@ -16,25 +16,54 @@ Optional files:
 
 # phase_tool.py
 # Sang Wook Kim
-# 10.22.2021
+# 06.02.2022
 
 import numpy as np
 from numpy import pi as π
 import math
 import pandas as pd
 import matplotlib.pyplot as plt
-import os
+import re,glob,os
+from collections import defaultdict
+import dgutils
 
-if os.path.exists('include/notebook.mplstyle') and os.path.exists('include/aps.mplstyle'):
-    # plot style
-    plot_style = {'notebook':'include/notebook.mplstyle','aps':'include/aps.mplstyle'}
+# if os.path.exists('include/notebook.mplstyle') and os.path.exists('include/aps.mplstyle'):
+#     # plot style
+#     plot_style = {'notebook':'include/notebook.mplstyle','aps':'include/aps.mplstyle'}
+#     plt.style.reload_library()
+#     plt.style.use(plot_style['aps'])
+#     figsize = plt.rcParams['figure.figsize']
+#     plt.rcParams['text.latex.preamble'] = f'\input{{{os.getcwd()}/include/texheader}}'
+
+#     colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
+#     print("plot style is loaded")
+# else:
+#     print("plot style don't exist")
+
+if os.path.exists('../include/sans_NC.mplstyle') and os.path.exists('../include/notebook.mplstyle'):
+    ### plot style
+    plot_style = {'notebook':'../include/notebook.mplstyle','sans':'../include/sans_NC.mplstyle'}
     plt.style.reload_library()
-    plt.style.use(plot_style['aps'])
+    plt.style.use(plot_style['sans'])
     figsize = plt.rcParams['figure.figsize']
-    plt.rcParams['text.latex.preamble'] = f'\input{{{os.getcwd()}/include/texheader}}'
 
     colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
-    print("plot style is loaded")
+
+    # setup a possible custom font path
+    from matplotlib import font_manager
+    def what_font_path (filename):
+        for p in font_manager.findSystemFonts(fontpaths=None, fontext="ttf"):
+            if p.find(filename) != -1:
+                return p
+
+    font_path,bold_font_path = '.','.'
+    if 'LOCAL_FONT_PATH' in os.environ:
+        font_path = os.environ['LOCAL_FONT_PATH'] + os.path.sep + 'HelveticaNeue/HelveticaNeue-Light-08.ttf'
+        bold_font_path = os.environ['LOCAL_FONT_PATH'] + os.path.sep + 'HelveticaNeue/HelveticaNeue-Bold-02.ttf'
+    else:
+        # local path (custom)
+        font_path = what_font_path('HelveticaNeue-Light-08')
+        bold_font_path = what_font_path('HelveticaNeue-Bold-02')
 else:
     print("plot style don't exist")
 
@@ -411,64 +440,93 @@ def plot_only(result):
     ylist = []
     yerrlst = []
     nfig = len(result['Tset'])
-    fitplot, axs = plt.subplots(nrows=nfig+1, ncols=1, 
-                                sharex=False, figsize = [5,2*nfig])
-    
-    # Defining custom 'xlim' and 'ylim' values.
-    custom_xlim1 = (0, max(_x1)*1.1)
-    custom_ylim1 = (0, np.amax(result['n']/result['totN'])*1.1)
-    
+    if nfig <= 1:
+        print("empty or single data")
+        return None
+    nrow = (nfig)//2+1
+    plt.style.reload_library()
+    with plt.style.context(plot_style['sans']):
+        fig = plt.figure(figsize = (3.4646*2, 2.14122*nrow))
+
+        ax1 = fig.add_subplot(nrow, 2, 1)
+        axs = []
+        
+#         fitplot, axs = plt.subplots(nrows=nrow, ncols=2, 
+#                                     sharex=True, figsize = (3.4646*2, 2.14122*nrow) )
+        dgutils.fonts.set_custom_font(font_path)
+
         # Defining custom 'xlim' and 'ylim' values.
-    custom_xlim2 = (0, max(_x2)*1.1)
-    custom_ylim2 = (0, np.amax(result['yarray'])*1.1)
+        custom_xlim1 = (0, max(_x1)*1.1)
+        custom_ylim1 = (0, np.amax(result['n']/result['totN'])*1.1)
 
-    # Setting the values for all axes.
-#     plt.setp(axs, xlim=custom_xlim2, ylim=custom_ylim2)
-    
-    axs[0].set_xlabel('1/N', fontsize = 12)
-    axs[0].set_ylabel('filling fraction', fontsize = 12)
-    axs[0].set_xlim(custom_xlim1)
-    axs[0].set_ylim(custom_ylim1)
+            # Defining custom 'xlim' and 'ylim' values.
+        custom_xlim2 = (0, max(_x2)*1.1)
+        custom_ylim2 = (0, np.amax(result['yarray'])*1.1)
 
-    for i in range(len(result['Tset'])):
-        tag = str(result['Tset'][i])
-        x = result['totN'][i]
-        x1 = np.asarray([1/(item) for item in x])
-        x2 = np.asarray([1/np.sqrt(item) for item in x])
-        y1 = result['n'][i]/result['totN'][i]
-        y2 = result['yarray'][i]
-        σ1 = result['nerr'][i]
-        σ2 = result['yerrarray'][i]
+        # Setting the values for all axes.
+    #     plt.setp(axs, xlim=custom_xlim2, ylim=custom_ylim2)
 
-        # peform the fits
-        a1,a1_err = get_a(x1,y1,σ1)
-        a1s,a1s_err = get_a(x2,y2,σ2)
 
-        # plot the data
-        axs[0].errorbar(x1, y1, yerr = σ1, color=colors[1], fmt='.')
+        ax1.set_xlabel('1/N')
+        ax1.set_ylabel('filling fraction')
+        ax1.set_xlim(custom_xlim1)
+        ax1.set_ylim(custom_ylim1)
 
-        # plot the fit results
-        fx1 = np.linspace(0,max(x1)*1.1,20)
-        axs[0].plot(fx1,a1[0]+a1[1]*fx1, linewidth=1.5, zorder=0, label=f'T={tag} fit')
+        for i in range(len(result['Tset'])):
+            tag = str(result['Tset'][i])
+            x = result['totN'][i]
+            x1 = np.asarray([1/(item) for item in x])
+            x2 = np.asarray([1/np.sqrt(item) for item in x])
+            y1 = result['n'][i]/result['totN'][i]
+            y2 = result['yarray'][i]
+            σ1 = result['nerr'][i]
+            σ2 = result['yerrarray'][i]
 
-        # plot the data
-        axs[i+1].errorbar(x2,y2,yerr = σ2,color=colors[0], fmt='.',label=f'T={tag}')
+            # peform the fits
+            a1,a1_err = get_a(x1,y1,σ1)
+            a1s,a1s_err = get_a(x2,y2,σ2)
 
-        # plot the fit results
-        fx2 = np.linspace(0,max(x2)*1.1,20)
+            # plot the data
+            ax1.errorbar(x1, y1, yerr = σ1, color=colors[i], fmt='.', ms = 5)
 
-        axs[i+1].plot(fx2,a1s[0]+a1s[1]*fx2, color=colors[0], linewidth=1.5, zorder=0, label=f'T={tag} fit')
-#             axs[i+1].set_title(f'T={tag}')
-        axs[i+1].set_xlabel('sqrt(1/N)', fontsize = 12)
-        axs[i+1].set_ylabel('SF fraction', fontsize = 12)
-        axs[i+1].set_xlim(custom_xlim2)
-        axs[i+1].set_ylim(custom_ylim2)
-        axs[i+1].legend()
-    
-    axs[0].legend()
-    fitplot.tight_layout()
+            # plot the fit results
+            fx1 = np.linspace(0,max(x1)*1.1,20)
+            ax1.plot(fx1,a1[0]+a1[1]*fx1, linewidth=1.5, color=colors[i], zorder=0, label=f'T={tag} fit')
 
-    return fitplot
+            # plot the data
+            if i<=1:
+                axs.append( fig.add_subplot(nrow, 2, i+2) )
+            else:
+                axs.append( fig.add_subplot(nrow, 2, i+2, ) ) #sharex = axs[i-2]
+                           
+            
+                
+            axs[i].errorbar(x2,y2,yerr = σ2,color=colors[i], fmt='.',label=f'T={tag}', ms = 5)
+
+            # plot the fit results
+            fx2 = np.linspace(0,max(x2)*1.1,20)
+
+            axs[i].plot(fx2,a1s[0]+a1s[1]*fx2, color=colors[i], linewidth=1.5, zorder=0, label=f'T={tag} fit')
+#             axs[i].set_xlabel('sqrt(1/N)')
+#             axs[i].set_ylabel('SF fraction')
+            axs[i].set_xlim(custom_xlim2)
+            axs[i].set_ylim(custom_ylim2)
+            axs[i].legend()
+            
+            if i%2 == 1 or i==0:
+                axs[i].set_ylabel('SF fraction')
+            else:
+                axs[i].axes.yaxis.set_ticklabels([])
+            if i < len(result['Tset'])-2:
+                axs[i].axes.xaxis.set_ticklabels([])
+
+        axs[i-1].set_xlabel('sqrt(1/N)')
+        axs[i].set_xlabel('sqrt(1/N)')
+
+        ax1.legend()
+        fig.tight_layout()
+
+    return fig
 # -----------------------------------------------------------------------------
 def plot_superdens(result):
     '''using result of esti_array, plot sf density vs 1/sqrt(totN) for each temperature'''
