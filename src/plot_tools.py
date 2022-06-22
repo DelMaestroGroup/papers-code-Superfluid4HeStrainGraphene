@@ -487,7 +487,7 @@ def plot_only(result):
             a1s,a1s_err = get_a(x2,y2,σ2)
 
             # plot the data
-            ax1.errorbar(x1, y1, yerr = σ1, color=colors[i], fmt='.', ms = 5)
+            ax1.errorbar(x1, y1, yerr = σ1, color=colors[i], fmt='.', ms = 5, label=f'T={tag} QMC')
 
             # plot the fit results
             fx1 = np.linspace(0,max(x1)*1.1,20)
@@ -501,7 +501,7 @@ def plot_only(result):
                            
             
                 
-            axs[i].errorbar(x2,y2,yerr = σ2,color=colors[i], fmt='.',label=f'T={tag}', ms = 5)
+            axs[i].errorbar(x2,y2,yerr = σ2,color=colors[i], fmt='.',label=f'T={tag} QMC', ms = 5)
 
             # plot the fit results
             fx2 = np.linspace(0,max(x2)*1.1,20)
@@ -514,16 +514,16 @@ def plot_only(result):
             axs[i].legend()
             
             if i%2 == 1 or i==0:
-                axs[i].set_ylabel('SF fraction')
+                axs[i].set_ylabel('Superfluid fraction')
             else:
                 axs[i].axes.yaxis.set_ticklabels([])
             if i < len(result['Tset'])-2:
                 axs[i].axes.xaxis.set_ticklabels([])
 
-        axs[i-1].set_xlabel('sqrt(1/N)')
-        axs[i].set_xlabel('sqrt(1/N)')
+        axs[i-1].set_xlabel('$1/ \sqrt{N}$')
+        axs[i].set_xlabel('$1/ \sqrt{N}$')
 
-        ax1.legend()
+        ax1.legend(ncol=2, loc=3)
         fig.tight_layout()
 
     return fig
