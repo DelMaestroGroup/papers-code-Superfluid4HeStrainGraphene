@@ -556,7 +556,10 @@ def plot_only_two(result, result2):
     nrow = (nfig)+1
     plt.style.reload_library()
     with plt.style.context(plot_style['sans']):
-        fig = plt.figure(figsize = (3.4646*2, 2.14122*nrow))
+
+        
+        fig = plt.figure(figsize = (3.4646*2, 2.14122*nrow/1.8))
+        fig.subplots_adjust(wspace=0.05,hspace=0.45)
 
         ax1 = fig.add_subplot(nrow, 2, 1)
         ax2 = fig.add_subplot(nrow, 2, 2)
@@ -589,8 +592,8 @@ def plot_only_two(result, result2):
         # add panel labels
         font_props = dgutils.fonts.get_custom_font_props(bold_font_path)
 
-        ax1.text(0.5,1.1,'μ=-94.0', ha='center',va='top', transform=ax1.transAxes, fontproperties=font_props)
-        ax2.text(0.5,1.1,'μ=-88.0', ha='center',va='top', transform=ax2.transAxes, fontproperties=font_props)
+        ax1.text(0.5,1.12,'μ = -94.0 K', ha='center',va='top', transform=ax1.transAxes, fontproperties=font_props)
+        ax2.text(0.5,1.12,'μ = -88.0 K', ha='center',va='top', transform=ax2.transAxes, fontproperties=font_props)
 
         for i in range(len(result['Tset'])):
             tag = str(result['Tset'][i])
@@ -623,16 +626,16 @@ def plot_only_two(result, result2):
 
             # plot the fit results
             fx1 = np.linspace(0,max(x1)*1.1,20)
-            ax1.plot(fx1,a1[0]+a1[1]*fx1, linewidth=1.5, color=colors[i], zorder=0, label=f'T={tag} fit')
+            ax1.plot(fx1,a1[0]+a1[1]*fx1, linewidth=1.5, color=colors[i], zorder=0, label=f'$T={tag}$ K fit')
             fx1b = np.linspace(0,max(p1)*1.1,20)
-            ax2.plot(fx1b,a1b[0]+a1b[1]*fx1b, linewidth=1.5, color=colors[i], zorder=0, label=f'T={tag} fit')
+            ax2.plot(fx1b,a1b[0]+a1b[1]*fx1b, linewidth=1.5, color=colors[i], zorder=0, label=f'$T={tag}$ K fit')
 
             # plot the data
             axs.append( fig.add_subplot(nrow, 2, 2*i+3) )
             axs.append( fig.add_subplot(nrow, 2, 2*i+4) )
 
-            axs[2*i].errorbar(x2,y2,yerr = σ2, color=colors[i], fmt='.',label=f'T={tag} QMC', ms = 5)
-            axs[2*i+1].errorbar(p2,k2,yerr = σb2, color=colors[i], fmt='.',label=f'T={tag} QMC', ms = 5)
+            axs[2*i].errorbar(x2,y2,yerr = σ2, color=colors[i], fmt='.',label=f'$T={tag}$ K QMC', ms = 5)
+            axs[2*i+1].errorbar(p2,k2,yerr = σb2, color=colors[i], fmt='.',label=f'$T={tag}$ K QMC', ms = 5)
 
             # plot the fit results
             fx2 = np.linspace(0,max(x2)*1.1,20)
@@ -657,6 +660,147 @@ def plot_only_two(result, result2):
         axs[2*i+1].set_xlabel('$1/ \sqrt{N}$')
 
         ax1.legend(ncol=2, loc=3)
+#        fig.tight_layout()
+
+    return fig
+
+# -----------------------------------------------------------------------------
+def plot_only_two_agd(result, result2):
+    '''using result of esti_array, plot n/totN vs totN for each temperature'''
+    '''also returns mean of it and maximum of error'''
+    ''' Modified by AGD on 2022-07-19. '''
+    _x = result['totN'][0]
+    _x1 = np.asarray([1/(item) for item in _x])
+    _x2 = np.asarray([1/np.sqrt(item) for item in _x])
+    _p = result2['totN'][0]
+    _p1 = np.asarray([1/(item) for item in _p])
+    _p2 = np.asarray([1/np.sqrt(item) for item in _p])
+    alist = []
+    aerrlist = []
+    ylist = []
+    yerrlst = []
+    nfig = len(result['Tset'])
+    alist2 = []
+    aerrlist2 = []
+    ylist2 = []
+    yerrlst2 = []
+    nfig2 = len(result2['Tset'])
+    if nfig <= 1 or nfig2 <= 1:
+        print("empty or single data")
+        return None
+    elif nfig != nfig2:
+        print("different set of temperature for two data")
+        return None
+    nrow = (nfig)+1
+    plt.style.reload_library()
+    with plt.style.context(plot_style['sans']):
+            
+        fig = plt.figure(figsize = (3.4646*2/1.2, 2.14122*nrow/2.25), constrained_layout=True)
+        rho_fig,rhos_fig = fig.subfigures(nrows=2,ncols=1, height_ratios=[1,4.5])
+                
+        #fig = plt.figure(figsize = (3.4646*2, 2.14122*nrow/1.8))
+        #fig.subplots_adjust(wspace=0.05,hspace=0.45)
+
+        #ax1 = rho_fig.add_subplot(1, 2, 1)
+        #ax2 = rho_fig.add_subplot(1, 2, 2)
+        
+        ax1 = rho_fig.subplots(nrows=1,ncols=2,sharex=True, sharey=True)
+        axs = rhos_fig.subplots(nrows=nrow-1,ncols=2, sharex=True, sharey=True)   
+        
+        #axs = axs.flat
+        #axs = []
+        dgutils.fonts.set_custom_font(font_path)
+
+        # Defining custom 'xlim' and 'ylim' values.
+        custom_xlim1 = (0, max(_x1)*1.1)
+        custom_ylim1 = (0.35, np.amax(result['n']/result['totN'])*1.2)
+
+        #Defining custom 'xlim' and 'ylim' values.
+        custom_xlim2 = (0, max(_x2)*1.1)
+        custom_ylim2 = (0, np.amax(result['yarray'])*1.1)
+
+        # Setting the values for all axes.
+    #     plt.setp(axs, xlim=custom_xlim2, ylim=custom_ylim2)
+
+        ax1[0].set_xlabel('1/N')
+        ax1[0].set_ylabel('filling fraction')
+        ax1[0].set_xlim(custom_xlim1)
+        ax1[0].set_ylim(custom_ylim1)
+        ax1[1].set_xlabel('1/N')
+        #ax1[1].axes.yaxis.set_ticklabels([])
+        ax1[0].set_xlim(custom_xlim1)
+        ax1[1].set_ylim(custom_ylim1)
+        # add panel labels
+        font_props = dgutils.fonts.get_custom_font_props(bold_font_path)
+
+        ax1[0].text(0.5,1.16,'μ = -94.0 K', ha='center',va='top', transform=ax1[0].transAxes, fontproperties=font_props)
+        ax1[1].text(0.5,1.16,'μ = -88.0 K', ha='center',va='top', transform=ax1[1].transAxes, fontproperties=font_props)
+
+        for i in range(len(result['Tset'])):
+            tag = str(result['Tset'][i])
+            x = result['totN'][i]
+            x1 = np.asarray([1/(item) for item in x])
+            x2 = np.asarray([1/np.sqrt(item) for item in x])
+            y1 = result['n'][i]/result['totN'][i]
+            y2 = result['yarray'][i]
+            σ1 = result['nerr'][i]
+            σ2 = result['yerrarray'][i]
+            
+            p = result2['totN'][i]
+            p1 = np.asarray([1/(item) for item in p])
+            p2 = np.asarray([1/np.sqrt(item) for item in p])
+            k1 = result2['n'][i]/result2['totN'][i]
+            k2 = result2['yarray'][i]
+            σb1 = result2['nerr'][i]
+            σb2 = result2['yerrarray'][i]
+
+            # peform the fits
+            a1,a1_err = get_a(x1,y1,σ1)
+            a1s,a1s_err = get_a(x2,y2,σ2)
+            
+            a1b,a1b_err = get_a(p1,k1,σb1)
+            a1bs,a1bs_err = get_a(p2,k2,σb2)
+
+            # plot the data
+            ax1[0].errorbar(x1, y1, yerr = σ1, color=colors[i], fmt='.', ms = 5, label=f'$T={tag}$ K QMC')
+            ax1[1].errorbar(p1, k1, yerr = σb1, color=colors[i], fmt='.', ms = 5, label=f'$T={tag}$ K QMC')
+
+            # plot the fit results
+            fx1 = np.linspace(0,max(x1)*1.1,20)
+            ax1[0].plot(fx1,a1[0]+a1[1]*fx1, linewidth=1, color=colors[i], zorder=0, label=f'$T={tag}$ K fit')
+            fx1b = np.linspace(0,max(p1)*1.1,20)
+            ax1[1].plot(fx1b,a1b[0]+a1b[1]*fx1b, linewidth=1, color=colors[i], zorder=0, label=f'$T={tag}$ K fit')
+
+            # plot the data
+#             axs.append( fig.add_subplot(nrow, 2, 2*i+3) )
+#             axs.append( fig.add_subplot(nrow, 2, 2*i+4) )
+
+            axs[i,0].errorbar(x2,y2,yerr = σ2, color=colors[i], fmt='.',label=f'$T={tag}$ K QMC', ms = 5)
+            axs[i,1].errorbar(p2,k2,yerr = σb2, color=colors[i], fmt='.',label=f'$T={tag}$ K QMC', ms = 5)
+
+            # plot the fit results
+            fx2 = np.linspace(0,max(x2)*1.1,20)
+            axs[i,0].plot(fx2,a1s[0]+a1s[1]*fx2, color=colors[i], linewidth=1, zorder=0, label=f'$T={tag}$ K fit')
+            fxb2 = np.linspace(0,max(x2)*1.1,20)
+            axs[i,1].plot(fxb2,a1bs[0]+a1bs[1]*fxb2, color=colors[i], linewidth=1, zorder=0, label=f'$T={tag}$ K fit')
+
+            axs[i,0].set_xlim(custom_xlim2)
+            axs[i,0].set_ylim(custom_ylim2)
+            axs[i,0].legend(loc=2)
+            axs[i,0].set_ylabel('Superfluid fraction')
+            #axs[i,1].set_xlim(custom_xlim2)
+            #axs[2*i+1].set_ylim(custom_ylim2)
+            axs[i,1].legend(loc=2)
+            #axs[2*i+1].axes.yaxis.set_ticklabels([])
+            
+#             if i < len(result['Tset'])-1:
+#                 axs[2*i].axes.xaxis.set_ticklabels([])
+#                 axs[2*i+1].axes.xaxis.set_ticklabels([])
+
+        axs[i,0].set_xlabel('$1/ \sqrt{N}$')
+        axs[i,1].set_xlabel('$1/ \sqrt{N}$')
+
+        #ax1[0].legend(ncol=3, loc=3)
 #        fig.tight_layout()
 
     return fig
