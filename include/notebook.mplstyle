@@ -7,8 +7,8 @@
 ### FONT
 font.size           : 18.0
 font.family         : sans-serif
-font.sans-serif     : Helvetica Neue
-font.weight         : light
+font.sans-serif     : Helvetica
+font.weight         : 5
 text.hinting        : auto
 text.hinting_factor : 8
 
