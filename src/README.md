@@ -42,7 +42,7 @@ Description:<br>
 Prerequisite:<br>
 - dframe_tools, plot_tools, gen_resubmit<br>
 - scipy.interpolate<br>
-- estimator, superfluid estimator, log files from PIMC simulation<br>
+- PIMC simulation data `../data/SFphase_data.csv`<br>
 
 ## box_figure_and_filling_states.ipynb
 Description:<br>
@@ -51,8 +51,6 @@ Description:<br>
 
 Prerequisite:<br>
 - gt.py<br>
-- scipy.interpolate<br>
-- estimator, superfluid estimator, log files from PIMC simulation<br>
 
 ## LargeBoxSim.ipynb
 Description:<br>
@@ -61,7 +59,7 @@ Description:<br>
 - Produce `largeBox2.pdf`
 
 Prerequisite:<br>
-- PIMC simulation data<br>
+- PIMC simulation data `../data/Largebox_data.csv`<br>
 
 ## lindenset.ipynb
 Description:<br>
@@ -70,7 +68,7 @@ Description:<br>
 - Produce `linden15-93.pdf`
 
 Prerequisite:<br>
-- PIMC simulation data<br>
+- PIMC simulation data `../data/SFphase_data.csv`<br>
 
 ## MeanField_python-2022.ipynb 
 Description:<br>
@@ -81,7 +79,7 @@ Description:<br>
 - Produce `mu_delta_phase_diagram.pdf`, `../figures/biaxial_strain.pdf`, and `../figures/mf_phase_diagrams.pdf`
 
 Prerequisite:<br>
-- `.../data/BH_vs_strain.dat`<br>
+- Bose-Hubbard calculation `.../data/BH_vs_strain.dat`<br>
 - Numerical supersolid energy data - `../data/SWData_r_30_large.csv` and `../data/SWData_r_1_large.csv`
 
 ## T1comm_phases.ipynb
@@ -107,7 +105,7 @@ Description:<br>
 Prerequisite:<br>
 - sklearn.linear_model<br>
 - scipy.interpolate<br>
-- estimator, log files from PIMC simulation<br>
+- PIMC simulation data `../data/vacuum_data.csv`<br>
 
 ## T1maker_upload.ipynb
 Description:<br>
