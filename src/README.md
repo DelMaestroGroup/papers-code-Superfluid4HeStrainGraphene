@@ -4,6 +4,7 @@ Prerequisite:<br>
 - numpy<br>
 - pandas<br>
 - matplotlib<br>
+- dgutils<br>
 
 ## dframe_tools
 Description:<br>
@@ -43,15 +44,68 @@ Prerequisite:<br>
 - scipy.interpolate<br>
 - estimator, superfluid estimator, log files from PIMC simulation<br>
 
+## box_figure_and_filling_states.ipynb
+Description:<br>
+- Jupyter notebook for box scaling figure<br>
+- Produce `scale_of_box.pdf`
+
+Prerequisite:<br>
+- gt.py<br>
+- scipy.interpolate<br>
+- estimator, superfluid estimator, log files from PIMC simulation<br>
+
+## LargeBoxSim.ipynb
+Description:<br>
+- Jupyter notebook for simulations with N_ad = 144<br>
+- This require processed data `../data/Largebox_data.csv` or raw data in `OUTPUT_largebox.zip`<br>
+- Produce `largeBox2.pdf`
+
+Prerequisite:<br>
+- PIMC simulation data<br>
+
+## lindenset.ipynb
+Description:<br>
+- Jupyter notebook for linear density plot<br>
+- This require processed data `../data/SFphase_data.csv` or raw data in `lindenset.zip`<br>
+- Produce `linden15-93.pdf`
+
+Prerequisite:<br>
+- PIMC simulation data<br>
+
+## MeanField_python-2022.ipynb 
+Description:<br>
+- Jupyter notebook for meanfield phase diagram<br>
+- Bezier
+- This require Bose-Hubbard calculation data `.../data/BH_vs_strain.dat`<br>
+- Also require supersolid energy data<br>
+- Produce `mu_delta_phase_diagram.pdf`, `../figures/biaxial_strain.pdf`, and `../figures/mf_phase_diagrams.pdf`
+
+Prerequisite:<br>
+- `.../data/BH_vs_strain.dat`<br>
+- Numerical supersolid energy data - `../data/SWData_r_30_large.csv` and `../data/SWData_r_1_large.csv`
+
+## T1comm_phases.ipynb
+Description:<br>
+- Jupyter notebook for PIMC phase diagram<br>
+- This require processed data `../data/T1comm_data.csv` or raw data in `OUTPUT_T1set.zip`<br>
+- Produce `ff_at00.pdf` and `fig3.pdf`
+
+Prerequisite:<br>
+- graphenetools.py
+- mpl_toolkits.axes_grid1
+- mpl_toolkits.axes_grid1.anchored_artists
+- mpl_toolkits.axes_grid1.inset_locator
+- `../data/vacuumline_x.csv`, `../data/vacuumline_yd.csv`, and `../data/vacuumline_yu.csv` from VacuumFinder.ipynb
+- `../data/planeden_super.dat`
+
 ## VacuumFinder.ipynb
 Description:<br>
 - Jupyter notebook for analysis of vacuum phase boundary<br>
+- This require processed data `../data/vacuum_data.csv` or raw data in `OUTPUT_vacuum.zip`<br>
+- Produce processed data `../data/vacuumline_x.csv`, `../data/vacuumline_yd.csv`, and `../data/vacuumline_yu.csv`
 
 Prerequisite:<br>
-- numpy<br>
-- pandas<br>
-- matplotlib<br>
-- dframe_tools, plot_tools, gen_resubmit<br>
+- sklearn.linear_model<br>
 - scipy.interpolate<br>
 - estimator, log files from PIMC simulation<br>
 
@@ -61,5 +115,4 @@ Description:<br>
 
 Prerequisite:<br>
 - math<br>
-- numpy<br>
 - graphenetools<br>
