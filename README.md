@@ -26,31 +26,24 @@ The creation of these materials was supported in part by the National Science Fo
 ### Figures
 
 #### Figure 01: Strain-tuning the mean field phase diagram
-<embed src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/56826e2f3ec9b626778a85d02ebbbf82b3265692/figures/mf_phase_diagrams.pdf" type="application/pdf">
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/mf_phase_diagrams.svg" width="400px">
 
 #### Figure 02: Strain-dependent adsorption and model parameters
-<object data="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/VG_vs_z_BH.pdf" width="100%" type="application/pdf"> 
-  <embed src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/VG_vs_z_BH.pdf">
-  </embed>
-</object>
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/VG_vs_z_BH.pdf" width="400px">
 
 #### Figure 03: Superfluid phase diagram for helium adsorbed on strained graphene
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/figures/fig3.pdf" width="400px">
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/fig3.svg" width="400px">
 
 #### Figure 04: Details of the superfluid phase
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/fig4.pdf" width="400px">
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/fig4.svg" width="400px">
 
 #### Figure 05: Mean-field phase diagram in physical units driven from Hartree-Fock based model parameters
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/mu_delta_phase_diagram_withS_high.pdf" width="400px">
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/mu_delta_phase_diagram_withS_high.svg" width="400px">
 
 #### Figure 06: Example of finite size effect analysis
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/figS3.pdf" width="400px">
-
-#### Figure 07: Density of atomic Helium layer and superfluid state of Helium
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/largeBox.pdf" width="400px">
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/figS3.svg" width="400px">
 
 #### Figure 07: Averaged linear density along z-direction
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/linden15-93.pdf" width="400px">
-
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/linden15-93.svg" width="400px">
 
 This figures are relesed under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) and can be freely copied, redistributed and remixed.
