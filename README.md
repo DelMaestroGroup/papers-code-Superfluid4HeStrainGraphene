@@ -26,10 +26,13 @@ The creation of these materials was supported in part by the National Science Fo
 ### Figures
 
 #### Figure 01: Strain-tuning the mean field phase diagram
-<embed src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/mf_phase_diagrams.pdf" type="application/pdf>
+<embed src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/56826e2f3ec9b626778a85d02ebbbf82b3265692/figures/mf_phase_diagrams.pdf" type="application/pdf">
 
 #### Figure 02: Strain-dependent adsorption and model parameters
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/VG_vs_z_BH.pdf" width="400px">
+<object data="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/VG_vs_z_BH.pdf" width="100%" type="application/pdf"> 
+  <embed src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/VG_vs_z_BH.pdf">
+  </embed>
+</object>
 
 #### Figure 03: Superfluid phase diagram for helium adsorbed on strained graphene
 <img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/fig3.pdf" width="400px">
