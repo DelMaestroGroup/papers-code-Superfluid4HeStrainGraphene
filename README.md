@@ -14,9 +14,9 @@ Interplay between bosonic atoms and solid substrates can potentially exhibit unc
 This repository includes links, code, scripts, and data to generate the figures in a paper.
 
 ### Requirements
-The data in this project was generated via path integral Monte Carlo (PIMC) simulation. You can find the source code for PIMC on https://github.com/DelMaestroGroup/pimc and raw data on Zenodo https://doi.org/10.5281/zenodo.7271852. Python notebooks and modules for analysis are in the .[src](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src) (See README.md in the directory), and data you need is in the [data](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/data) directory
+The data in this project was generated via path integral Monte Carlo (PIMC) simulation. You can find the source code for PIMC on https://github.com/DelMaestroGroup/pimc and raw data on Zenodo https://doi.org/10.5281/zenodo.7271852. Python notebooks and modules for analysis are in the [src](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src) (See README.md in the directory), and data you need is in the [data](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/data) directory
 
-* [Dependency Name](https://dependencelink)
+* [See README.md in the directory]([https://dependencelink](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src))
 
 ### Support
 The creation of these materials was supported in part by the National Science Foundation under Award No. DMR-1553991.
@@ -26,7 +26,7 @@ The creation of these materials was supported in part by the National Science Fo
 ### Figures
 
 #### Figure 01: Strain-tuning the mean field phase diagram
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/mf_phase_diagrams.pdf" width="400px">
+<embed src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/mf_phase_diagrams.pdf" type="application/pdf>
 
 #### Figure 02: Strain-dependent adsorption and model parameters
 <img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/blob/main/figures/VG_vs_z_BH.pdf" width="400px">
