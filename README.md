@@ -35,7 +35,7 @@ The creation of these materials was supported in part by the National Science Fo
 </object>
 
 #### Figure 03: Superfluid phase diagram for helium adsorbed on strained graphene
-<img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/fig3.pdf" width="400px">
+<img src="https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/figures/fig3.pdf" width="400px">
 
 #### Figure 04: Details of the superfluid phase
 <img src="https://github.com/DelMaestroGroup/papers-code-Superfulid4HeStrainGraphene/blob/main/figures/figures/fig4.pdf" width="400px">
