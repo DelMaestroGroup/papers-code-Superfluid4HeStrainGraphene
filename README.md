@@ -8,7 +8,7 @@ Sang Wook Kim, Mohamed Elsayed, Taras Lakoba, Juan Vanegas, Valeri Kotov, Adrian
 [arXiv:XXXX.YYYYY](https://arxiv.org/abs/XXXX.YYYYY)
 
 ### Abstract
-Interplay between bosonic atoms and solid substrates can potentially exhibit unconventional many-body physics that has not been observed in cold atom gases. Such systems resemble atoms confined to an optical lattice with atomic-scale periodicity. Using quantum simulations, we have found the first evidence of the emergence of an atomically thin superfluid phase of matter under experimentally feasible values of isotropic strain on graphene. While it is known that the first layer of adsorbed helium on 'unstrained' graphene is permanently locked into a solid phase, the presence of isotropic strain leads to an energetic competition of ordered commensurate, incommensurate, cluster atomic solid, and superfluid states.
+Bosonic atoms deposited on atomically thin substrates represent a playground for exotic quantum many-body physics due to the  highly-tunable, atomic-scale nature of the interaction potentials.  The ability to engineer strong interparticle interactions can lead to the emergence of complex collective atomic states of matter, not possible in the context of dilute Bose gases confined by optical lattices. While it is known that the first layer of adsorbed helium on graphene is permanently locked into a solid phase, we show by a combination of quantum Monte Carlo and mean-field techniques, that  simple isotropic (graphene) lattice expansion effectively unlocks a large variety of two-dimensional ordered commensurate, incommensurate, cluster atomic solid, and superfluid states for adsorbed atoms.  It is especially significant that an atomically thin superfluid phase of matter emerges under experimentally feasible strain values, with potentially supersolid phases in close proximity on the phase diagram.
 
 ### Description
 This repository includes links, code, scripts, and data to generate the figures in a paper.
@@ -19,9 +19,8 @@ The data in this project was generated via path integral Monte Carlo (PIMC) simu
 * Dependency: [See README.md in the directory]([https://dependencelink](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src))
 
 ### Support
-The creation of these materials was supported in part by the National Science Foundation under Award No. DMR-1553991.
 
-[<img width="100px" src="https://www.nsf.gov/images/logos/NSF_4-Color_bitmap_Logo.png">](http://www.nsf.gov/awardsearch/showAward?AWD_ID=1553991)
+This work was supported by NASA grant number [80NSSC19M0143](https://www.usaspending.gov/award/ASST_NON_80NSSC19M0143_8000).
 
 ### Figures
 
