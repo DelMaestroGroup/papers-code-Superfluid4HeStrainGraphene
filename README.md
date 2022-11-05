@@ -16,7 +16,10 @@ This repository includes links, code, scripts, and data to generate the figures 
 ### Requirements
 The data in this project was generated via path integral Monte Carlo (PIMC) simulation. You can find the source code for PIMC on https://github.com/DelMaestroGroup/pimc and raw data on Zenodo https://doi.org/10.5281/zenodo.7271852. Python notebooks and modules for analysis are in the [src](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src) (See README.md in the directory), and data you need is in the [data](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/data) directory
 
-* Dependency: [See README.md in the directory]([https://dependencelink](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src))
+* Dependency: See [./src/README.md](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src).
+
+You can also install a minimal environment via:
+    pip install -r requirements.txt 
 
 ### Support
 

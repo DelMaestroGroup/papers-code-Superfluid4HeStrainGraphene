@@ -1,0 +1,17 @@
+# required packages
+scipy
+heprops
+matplotlib
+numpy
+pynverse
+pandas
+jupyterlab
+zenodo_get
+json
+erroranalysis-py 
+graphenetools-py
+sklearn
+
+## Installed from git
+git+git://github.com/DelMaestroGroup/dgutils.git#egg=dgutils
+git+git://github.com/DelMaestroGroup/pimcscripts.git#egg=pimcscripts
