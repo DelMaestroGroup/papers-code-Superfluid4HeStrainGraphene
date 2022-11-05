@@ -18,8 +18,7 @@ The data in this project was generated via path integral Monte Carlo (PIMC) simu
 
 * Dependency: See [./src/README.md](https://github.com/DelMaestroGroup/papers-code-Superfluid4HeStrainGraphene/tree/main/src).
 
-You can also install a minimal environment via:
-    pip install -r requirements.txt 
+You can also install a minimal environment via: `pip install -r requirements.txt` 
 
 ### Support
 
