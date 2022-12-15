@@ -1,4 +1,4 @@
-[![Paper](https://img.shields.io/badge/paper-arXiv%3AXXXX.YYYYY-B31B1B.svg)](https://arxiv.org/abs/XXXX.YYYYY)
+[![Paper](https://img.shields.io/badge/paper-arXiv%3A2211.07672-B31B1B.svg)](https://arxiv.org/abs/2211.07672)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.7294691.svg)](https://doi.org/10.5281/zenodo.7294691)
 
 
@@ -6,7 +6,7 @@
 
 Sang Wook Kim, Mohamed Elsayed, Taras Lakoba, Juan Vanegas, Valeri Kotov, Adrian Del Maestro
 
-[arXiv:XXXX.YYYYY](https://arxiv.org/abs/XXXX.YYYYY)
+[arXiv:2211.07672](https://arxiv.org/abs/2211.07672)
 
 ### Abstract
 Bosonic atoms deposited on atomically thin substrates represent a playground for exotic quantum many-body physics due to the  highly-tunable, atomic-scale nature of the interaction potentials.  The ability to engineer strong interparticle interactions can lead to the emergence of complex collective atomic states of matter, not possible in the context of dilute Bose gases confined by optical lattices. While it is known that the first layer of adsorbed helium on graphene is permanently locked into a solid phase, we show by a combination of quantum Monte Carlo and mean-field techniques, that  simple isotropic (graphene) lattice expansion effectively unlocks a large variety of two-dimensional ordered commensurate, incommensurate, cluster atomic solid, and superfluid states for adsorbed atoms.  It is especially significant that an atomically thin superfluid phase of matter emerges under experimentally feasible strain values, with potentially supersolid phases in close proximity on the phase diagram.
