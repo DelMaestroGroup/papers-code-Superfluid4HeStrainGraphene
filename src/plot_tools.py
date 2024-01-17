@@ -42,9 +42,9 @@ import dgutils
 
 if os.path.exists('../include/sans_NC.mplstyle') and os.path.exists('../include/notebook.mplstyle'):
     ### plot style
-    plot_style = {'notebook':'../include/notebook.mplstyle','sans':'../include/sans_NC.mplstyle'}
+    plot_style = {'notebook':'../include/notebook.mplstyle','sans':'../include/sans_NC.mplstyle', 'aps':'../include/aps.mplstyle'}
     plt.style.reload_library()
-    plt.style.use(plot_style['sans'])
+    plt.style.use(plot_style['aps'])
     figsize = plt.rcParams['figure.figsize']
 
     colors = plt.rcParams['axes.prop_cycle'].by_key()['color']
@@ -555,7 +555,7 @@ def plot_only_two(result, result2):
         return None
     nrow = (nfig)+1
     plt.style.reload_library()
-    with plt.style.context(plot_style['sans']):
+    with plt.style.context(plot_style['aps']):
 
         
         fig = plt.figure(figsize = (3.4646*2, 2.14122*nrow/1.8))
@@ -693,7 +693,7 @@ def plot_only_two_agd(result, result2):
         return None
     nrow = (nfig)+1
     plt.style.reload_library()
-    with plt.style.context(plot_style['sans']):
+    with plt.style.context(plot_style['aps']):
             
         fig = plt.figure(figsize = (3.4646*2/1.2, 2.14122*nrow/2.25), constrained_layout=True)
         rho_fig,rhos_fig = fig.subfigures(nrows=2,ncols=1, height_ratios=[1,4.5])
@@ -733,8 +733,8 @@ def plot_only_two_agd(result, result2):
         # add panel labels
         font_props = dgutils.fonts.get_custom_font_props(bold_font_path)
 
-        ax1[0].text(0.5,1.16,'μ = -94.0 K', ha='center',va='top', transform=ax1[0].transAxes, fontproperties=font_props)
-        ax1[1].text(0.5,1.16,'μ = -88.0 K', ha='center',va='top', transform=ax1[1].transAxes, fontproperties=font_props)
+        ax1[0].text(0.5,1.16,r'$\mu = -94.0$ K', ha='center',va='top', transform=ax1[0].transAxes, fontproperties=font_props)
+        ax1[1].text(0.5,1.16,r'$\mu = -88.0$ K', ha='center',va='top', transform=ax1[1].transAxes, fontproperties=font_props)
 
         for i in range(len(result['Tset'])):
             tag = str(result['Tset'][i])
@@ -787,7 +787,7 @@ def plot_only_two_agd(result, result2):
             axs[i,0].set_xlim(custom_xlim2)
             axs[i,0].set_ylim(custom_ylim2)
             axs[i,0].legend(loc=2)
-            axs[i,0].set_ylabel('Superfluid fraction')
+            axs[i,0].set_ylabel(r'$\rho_s/\rho$')
             #axs[i,1].set_xlim(custom_xlim2)
             #axs[2*i+1].set_ylim(custom_ylim2)
             axs[i,1].legend(loc=2)
